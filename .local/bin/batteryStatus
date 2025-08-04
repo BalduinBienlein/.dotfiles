@@ -1,0 +1,24 @@
+#!/bin/bash
+
+# Adjust BAT0 if needed
+BAT_PATH="/sys/class/power_supply/BAT0"
+CAPACITY=$(cat "$BAT_PATH/capacity")
+STATUS=$(cat "$BAT_PATH/status")
+
+ICON=""
+DOTC="#434d44"
+if [ "$STATUS" = "Charging" ]; then
+    ICON="󱐋"
+    DOTC="#23522f"
+else
+    if [ "$CAPACITY" -le 15 ]; then
+        ICON=""
+        DOTC="#a30000"
+    elif [ "$CAPACITY" -le 40 ]; then
+        ICON=""
+        DOTC="#b83b06"
+    else
+        ICON=""
+    fi
+fi
+echo "#[fg=$DOTC]$ICON#[fg=default] ${CAPACITY}%"

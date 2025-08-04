@@ -1,0 +1,86 @@
+// I was here
+configuration {
+  display-drun: "Applications:";
+  display-window: "Windows:";
+  drun-display-format: "{name}";
+  font: "JetBrainsMono Nerd Font Medium 10";
+  modi: "window,run,drun";
+  
+  show-icons: true;
+}
+
+@theme "/dev/null"
+
+* {
+  //bg: #0d1f00;
+  //bg-alt: #0d1f00;
+  bg: #0F1409;
+  bg-alt: #0F1409;
+  //bg-selected: #527653;
+  bg-selected: #282828;
+  //fg: #66B032;
+  fg: #A4BE82;
+  fg-alt: #000000;
+  //high: #1fd621;
+  high: #60663d;
+  background-color: @bg;
+}
+
+window {
+  border: 2px;
+  border-color: @high;
+  border-radius: 7px;
+  width: 50%;
+}
+
+element {
+  padding: 8 12;
+  background-color: transparent;
+  text-color: @fg;
+}
+
+element selected {
+  text-color: @fg-alt;
+  background-color: @bg-selected;
+}
+
+element-text {
+  background-color: transparent;
+  text-color: inherit;
+  vertical-align: 0.5;
+}
+
+element-icon {
+  size: 14;
+  padding: 0 10 0 0;
+  background-color: transparent;
+}
+
+entry {
+  padding: 12;
+  background-color: @bg-alt;
+  text-color: @fg;
+}
+
+inputbar {
+  children: [prompt, entry];
+  background-color: @bg;
+}
+
+listview {
+  background-color: @bg;
+  columns: 1;
+  lines: 10;
+}
+
+mainbox {
+  children: [inputbar, listview];
+  background-color: @bg;
+}
+
+prompt {
+  enabled: true;
+  padding: 12 0 0 12;
+  background-color: @bg-alt;
+  text-color: @fg;
+}

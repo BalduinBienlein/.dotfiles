@@ -1,0 +1,22 @@
+#!/bin/bash
+
+bluetoothctl power on &>/dev/null
+
+bluetoothctl scan on &>/dev/null &
+SCAN_PID=$!
+sleep 5
+kill "$SCAN_PID" &>/dev/null
+
+device_list=$(bluetoothctl devices | awk '{print $2 " " substr($0, index($0,$3))}')
+
+chosen=$(echo "$device_list" | rofi -dmenu -p "Select Bluetooth Device")
+
+[ -z "$chosen" ] && notify-send "Bluetooth" "No Device selected" && exit 1
+
+mac=$(echo "$chosen" | awk '{print $1}')
+
+if bluetoothctl trust "$mac" && bluetoothctl pair "$mac" && bluetoothctl connect "$mac"; then
+    notify-send "Bluetooth" "Connected to $(echo "$chosen" | cut -d' ' -f2-)"
+else
+    notify-send "Bluetooth" "Failed to connect to $(echo "$chosen" | cut -d' ' -f2-)"
+fi
