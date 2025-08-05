@@ -9,13 +9,12 @@ vim.keymap.set("n", "<C-u>", "<C-u>zz")
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 
-vim.keymap.set("v", "<leader>y", "!xclip -f -selection clipboard<CR>", { silent = true })
-vim.keymap.set("v", "<leader>p", "!xclip -f -selection clipboard -o<CR>", { silent = true })
-vim.keymap.set("n", "<leader>p", "!xclip -f -selection clipboard -o<CR>", { silent = true })
+vim.keymap.set("v", "<leader>y", '"+y', { silent = true })
+vim.keymap.set("v", "<leader>p", '"+p', { silent = true })
+vim.keymap.set("n", "<leader>p", '"+p', { silent = true })
 
 vim.keymap.set("n", "Q", "<nop>")
 vim.keymap.set("n", "<leader>f", vim.lsp.buf.format)
-
 vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz")
 vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz")
 vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz")
