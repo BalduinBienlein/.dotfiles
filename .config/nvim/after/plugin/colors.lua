@@ -1,9 +1,19 @@
 vim.cmd("colorscheme darkearth")
 
 local function make_transparent(group)
-  local ok, hl = pcall(vim.api.nvim_get_hl, 0, { name = group })
-  if ok then
-    vim.api.nvim_set_hl(0, group, { fg = hl.fg, bg = "NONE" })
+  local ok, hl = pcall(function()
+    -- resolve links first
+    local linked = vim.api.nvim_get_hl(0, { name = group })
+    if linked.link then
+      return vim.api.nvim_get_hl(0, { name = linked.link })
+    end
+    return linked
+  end)
+
+  if ok and hl then
+    local new_hl = { bg = "NONE" }
+    if hl.fg then new_hl.fg = hl.fg end
+    vim.api.nvim_set_hl(0, group, new_hl)
   end
 end
 
@@ -42,6 +52,20 @@ local ui_groups = {
     "DiagnosticSignHint",
     "DiagnosticUnnecessary",
     "DiagnosticDeprecated",
+
+    -- Borders
+    "TelescopeBorder",
+    "TelescopePromptBorder",
+    "TelescopeResultsBorder",
+    "TelescopePreviewBorder",
+
+    -- Titles above each section
+    "TelescopePromptTitle",
+    "TelescopeResultsTitle",
+    "TelescopePreviewTitle",
+
+    -- The ">" prompt prefix symbol
+    "TelescopePromptPrefix",
 }
 
 for _, group in ipairs(ui_groups) do

@@ -14,22 +14,12 @@ return require('packer').startup(function(use)
     use('nvim-treesitter/playground')
     use('theprimeagen/harpoon')
     use('mbbill/undotree')
-    use('tpope/vim-fugitive')
     use('tpope/vim-commentary')
     use('ap/vim-css-color')
-    use('typicode/bg.nvim')
-    use('christoomey/vim-tmux-navigator')
     use({
         'nvim-lualine/lualine.nvim',
         requires = { 'nvim-tree/nvim-web-devicons', opt = true }
     })
-    -- use({
-    --     'i3d/vim-jimbothemes',
-    --     as = 'darkmatrix',
-    --     config = function()
-    --         vim.cmd('colorscheme darkmatrix')
-    --     end,
-    -- })
     use ({
         'ptdewey/darkearth-nvim',
         as = 'darkearth',
