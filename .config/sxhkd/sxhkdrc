@@ -1,7 +1,7 @@
 # I was here
 
 super + Return
-	alacritty
+    alacritty -e zsh -ic 't $(zoxide query -l | fzf)'
 
 super + space
 	rofi -show drun
