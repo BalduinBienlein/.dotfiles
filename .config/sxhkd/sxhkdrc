@@ -3,6 +3,9 @@
 super + Return
     alacritty -e zsh -ic 't $(zoxide query -l | fzf)'
 
+super + t
+    alacritty
+
 super + space
 	rofi -show drun
 
@@ -18,6 +21,8 @@ super + s
 super + b
 	firefox
 
+super + m
+    mount_manager
 {F10,F11}
     connect_headphones
 
@@ -25,31 +30,12 @@ F8
     connect_wifi
 
 # bspwm hotkeys
-
-super + shift + {c,r}
-	bspc {quit,wm -r}
-
 super + q
 	bspc node -c
 
-super + i
-	bspc node -R 90
-
-super + shift + i
-	bspc node -R -90
-
-super + m
+# fullscreen
+super + f
 	bspc desktop -l next
-
-# send the newest marked node to the newest preselected node
-super + y
-	bspc node newest.marked.local -n newest.!automatic.local
-
-super + g
-	bspc node -s biggest.window
-
-super + {t,shift + f,f}
-	bspc node -t {tiled,floating,fullscreen}
 
 # focus the node in the given direction
 super + {_,shift + }{h,j,k,l}
@@ -59,11 +45,19 @@ super + {_,shift + }{h,j,k,l}
 super + {_,shift + }{1-9,0}
 	bspc {desktop -f,node -d} '^{1-9,10}'
 
-super + ctrl + {h,j,k,l}
-	bspc node -z {left -80 0,bottom 0 80, top 0 -80,right 80 0}
+# resize windows
+# control + shift + {h,j,k,l}
+#   bspc node -z {left -20 0 || bspc node -z right -20 0, \
+#                 bottom 0 20 || bspc node -z top 0 20,\
+#                 top 0 -20 || bspc node -z bottom 0 -20,\
+#                 right 20 0 || bspc node -z left 20 0}
 
 super + alt + {h,j,k,l}
-	bspc node -z {right -80 0, top 0 80, bottom 0 -80,left 80 0}
+    bspc node -z {left -240 0 || bspc node -z right -240 0, \
+        bottom 0 180 || bspc node -z top 0 180, \
+        top 0 -180 || bspc node -z bottom 0 -180, \
+        right 240 0 || bspc node -z left 240 0} 
+
 
 F1
     pactl set-sink-mute @DEFAULT_SINK@ toggle

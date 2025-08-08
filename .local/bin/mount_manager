@@ -1,0 +1,48 @@
+#!/bin/bash
+
+# List all partitions (type=part), mounted or not
+devices=$(lsblk -rpno NAME,MOUNTPOINT,TYPE | awk '$3 == "part"')
+
+if [ -z "$devices" ]; then
+  notify-send "No devices found"
+  exit 1
+fi
+
+# Build the menu
+menu=""
+while IFS= read -r line; do
+  dev=$(echo "$line" | awk '{print $1}')
+  mnt=$(echo "$line" | awk '{print $2}')
+  label=$(lsblk -no LABEL "$dev" | head -n1)
+  name="${label:-$dev}"
+
+  if [ -n "$mnt" ]; then
+    menu+="$name [Unmount] [$dev mounted at $mnt]\n"
+  else
+    menu+="$name [Mount] [$dev not mounted]\n"
+  fi
+done <<< "$devices"
+
+# Use rofi to select
+choice=$(echo -e "$menu" | rofi -dmenu -p "Devices:")
+
+[ -z "$choice" ] && exit
+
+# Extract action and device
+action=$(echo "$choice" | rg -oP '\[.*?\]' | head -n1 | tr -d '[]')
+dev=$(echo "$choice" | rg -oP '\[(\/dev\/[^\] ]+)' | tr -d '[')
+
+# Perform the action
+case "$action" in
+  Mount)
+    udisksctl mount -b "$dev" && notify-send "Mounted $dev" || notify-send "Failed to mount $dev"
+    ;;
+  Unmount)
+    udisksctl unmount -b "$dev" && notify-send "Unmounted $dev" || notify-send "Failed to unmount $dev"
+    # Optional power off
+    # parent=$(lsblk -no PKNAME "$dev")
+    # if [ -n "$parent" ]; then
+    #   udisksctl power-off -b "/dev/$parent" && notify-send "Powered off /dev/$parent"
+    # fi
+    ;;
+esac
