@@ -1,0 +1,88 @@
+#!/bin/bash
+# GUI-only mount script with LUKS support using rofi
+
+IFS=$'\n'
+
+# Get all block devices
+lsblkoutput="$(lsblk -rpo "name,label,fstype,mountpoint,type")"
+
+# Get LUKS partitions
+allluks="$(echo "$lsblkoutput" | grep crypto_LUKS)"
+
+# Already decrypted
+decrypted="$(find /dev/disk/by-id/dm-uuid-CRYPT-LUKS2-* 2>/dev/null | sed "s|.*LUKS2-||;s|-.*||")"
+
+# Formatting helper for rofi menu
+filter() { sed "s/ /:/g" | awk -F':' '$4==""{printf "%s%s (%s)\n",$1,$2,$3}' ; }
+
+# LUKS drives not yet opened
+unopenedluks="$(for drive in $allluks; do
+    uuid="${drive%% *}"
+    uuid="${uuid//-}"  # remove dashes
+    [ -n "$decrypted" ] && for open in $decrypted; do
+        [ "$uuid" = "$open" ] && break 1
+    done && continue 1
+    echo "$drive"
+done | filter)"
+
+# Normal Linux partitions (exclude EFI/Windows)
+normalparts="$(echo "$lsblkoutput" \
+    | awk '$4=="" && $5=="part" && $2!~/EFI|Microsoft/' \
+    | filter)"
+
+# Combine
+alldrives="$(echo "$unopenedluks
+$normalparts" | sed "/^$/d")"
+
+[ -z "$alldrives" ] && notify-send "Mount" "No drives available." && exit 1
+
+# Choose drive
+chosen="$(echo "$alldrives" | rofi -dmenu -i -p "Select drive to mount")"
+[ -z "$chosen" ] && exit 1
+
+# Extract device path
+chosen="${chosen%% *}"
+
+# Ask for mountpoint
+getmount() {
+    mp=$(find /mnt /media /mount /home -maxdepth 1 -type d 2>/dev/null | rofi -dmenu -i -p "Mount here?")
+    [ -n "$mp" ] || exit 1
+    [ ! -d "$mp" ] && mkdir -p "$mp"
+}
+
+# Ask for sudo password via rofi
+PASSWORD=$(rofi -dmenu -password -p "Enter sudo password:")
+
+# Function to mount normally
+mount_partition() {
+    getmount
+    echo "$PASSWORD" | sudo -S mount "$chosen" "$mp" -o uid="$(id -u)",gid="$(id -g)"
+    notify-send "Drive Mounted" "$chosen mounted to $mp"
+}
+
+# Function to handle LUKS
+mount_luks() {
+    # Number the mapped device
+    num=0
+    while [ -b "/dev/mapper/usb$num" ]; do
+        num=$((num + 1))
+    done
+    num=$(printf "%02d" "$num")
+
+    # Open LUKS partition
+    echo "$PASSWORD" | sudo -S cryptsetup open "$chosen" "usb$num"
+    [ -b "/dev/mapper/usb$num" ] || { notify-send "Error" "Failed to open LUKS device"; exit 1; }
+
+    # Mount
+    getmount
+    echo "$PASSWORD" | sudo -S mount "/dev/mapper/usb$num" "$mp" -o uid="$(id -u)",gid="$(id -g)"
+    notify-send "LUKS Mounted" "$chosen decrypted and mounted to $mp"
+}
+
+# Determine type
+parttype="$(echo "$lsblkoutput" | grep "$chosen")"
+if [[ "$parttype" == *"crypto_LUKS"* ]]; then
+    mount_luks
+else
+    mount_partition
+fi
