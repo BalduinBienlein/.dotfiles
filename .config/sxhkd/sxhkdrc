@@ -1,10 +1,10 @@
 # I was here
 
 super + Return
-    alacritty -e zsh -ic 't $(zoxide query -l | fzf)'
+    alacritty
 
 super + t
-    alacritty
+    alacritty -e zsh -ic 't $(zoxide query -l | fzf)'
 
 super + space
 	rofi -show drun
@@ -22,7 +22,8 @@ super + b
 	firefox
 
 super + m
-    mount_manager
+    mounter
+
 {F10,F11}
     connect_headphones
 
