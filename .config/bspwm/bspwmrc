@@ -35,4 +35,4 @@ xcape -e 'Control_L=Escape'
 dunst &
 
 # run udiskie
-udiskie --no-automount --smart --tray --notify &
+udiskie --notify &

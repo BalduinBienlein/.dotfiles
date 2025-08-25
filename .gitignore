@@ -1,10 +1,13 @@
 .config/zsh/.zsh_history
 .config/zsh/zsh_history
-.config/tmux/plugins/*
+.config/tmux/plugins/
 .config/user-dirs.dirs
 .config/user-dirs.locale
-.config/pulse/*
-.config/dconf/*
+.config/pulse/
+.config/dconf/
+.config/QtProject.conf
+.config/kdeglobals
+.config/kdenlive-layoutsrc
+.config/kdenliverc
 .local/bin/debugpy
 .local/bin/debugpy-adapter
-

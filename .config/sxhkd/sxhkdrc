@@ -46,13 +46,6 @@ super + {_,shift + }{h,j,k,l}
 super + {_,shift + }{1-9,0}
 	bspc {desktop -f,node -d} '^{1-9,10}'
 
-# resize windows
-# control + shift + {h,j,k,l}
-#   bspc node -z {left -20 0 || bspc node -z right -20 0, \
-#                 bottom 0 20 || bspc node -z top 0 20,\
-#                 top 0 -20 || bspc node -z bottom 0 -20,\
-#                 right 20 0 || bspc node -z left 20 0}
-
 super + alt + {h,j,k,l}
     bspc node -z {left -240 0 || bspc node -z right -240 0, \
         bottom 0 180 || bspc node -z top 0 180, \
@@ -61,7 +54,7 @@ super + alt + {h,j,k,l}
 
 
 F1
-    pactl set-sink-mute @DEFAULT_SINK@ toggle
+    pactl set-sink-mute @DEFAULT_SINK@ toggle && notify-send "Toggle Mute Volume"
 
 F2
     pactl set-sink-volume @DEFAULT_SINK@ -5% && notify-send "Decreasing Volume"
