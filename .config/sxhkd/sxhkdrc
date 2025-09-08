@@ -23,9 +23,6 @@ super + s
 super + b
 	firefox
 
-super + m
-    mounter
-
 {F10,F11}
     connect_headphones
 
