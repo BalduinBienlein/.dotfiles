@@ -1,5 +1,13 @@
 vim.cmd("colorscheme darkearth")
 
+-- vim.api.nvim_create_autocmd("FileType", {
+--     pattern = "text",
+--     callback = function()
+--         -- change the foreground (fg) and background (bg) for Normal
+--         vim.api.nvim_set_hl(0, "Normal", { fg = "#535634", bg = "NONE" })
+--     end,
+-- })
+
 local function make_transparent(group)
   local ok, hl = pcall(function()
     -- resolve links first

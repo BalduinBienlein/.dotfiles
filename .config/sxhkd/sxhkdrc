@@ -1,5 +1,4 @@
 # I was here
-
 super + Return
     alacritty
 
@@ -8,6 +7,9 @@ super + t
 
 super + space
 	rofi -show drun
+
+ctrl + b
+    xdotool type $(rg -v '^#' $HOME/.local/share/snippets | rofi -dmenu -i | cut -d' ' -f1)
 
 super + w
 	redshift -P -O 6500

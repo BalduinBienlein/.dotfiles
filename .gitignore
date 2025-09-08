@@ -4,6 +4,8 @@
 .config/user-dirs.dirs
 .config/user-dirs.locale
 .config/pulse/
+.config/go/
+.config/htop/
 .config/dconf/
 .config/QtProject.conf
 .config/kdeglobals
