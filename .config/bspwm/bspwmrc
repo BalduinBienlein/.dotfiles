@@ -28,8 +28,16 @@ picom -b
 
 xsetroot -cursor_name left_ptr
 
-xmodmap -e 'remove Lock = Caps_Lock' -e 'keysym Caps_Lock = Control_L' -e 'add Control = Control_L'
+# CapsLock → Ctrl (hold) / Esc (tap)
+xmodmap -e 'remove Lock = Caps_Lock' \
+        -e 'keysym Caps_Lock = Control_L' \
+        -e 'add Control = Control_L'
+
 xcape -e 'Control_L=Escape'
+
+# PrintScreen → Super
+xmodmap -e 'keysym Print = Super_L'
+xmodmap -e 'add Mod4 = Super_L'
 
 # start dunst for notifications
 dunst &

@@ -11,6 +11,18 @@ super + space
 ctrl + b
     xdotool type $(rg -v '^#' $HOME/.local/share/snippets | rofi -dmenu -i | cut -d' ' -f1)
 
+super + p
+    xdotool type --clearmodifiers "$(pass show "$(find ~/.password-store -type f -name '*.gpg' \
+    | sed 's|.*/||; s|\.gpg$||' \
+    | grep -v '^A' \
+    | rofi -dmenu -p 'Password')" | head -n1)"
+
+super + a
+    xdotool type --clearmodifiers "$(pass otp "$(find ~/.password-store -type f -name '*.gpg' \
+    | sed 's|.*/||; s|\.gpg$||' \
+    | grep '^A' \
+    | rofi -dmenu -p 'OTP')")"
+
 super + w
 	redshift -P -O 6500
 
