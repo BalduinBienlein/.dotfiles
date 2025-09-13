@@ -5,6 +5,10 @@ configuration {
   drun-display-format: "{name}";
   font: "JetBrainsMono Nerd Font Medium 10";
   modi: "window,run,drun";
+  kb-row-up: "control+k";
+  kb-row-down: "control+j";
+  kb-remove-to-eol: "control+shift+e";
+  kb-accept-entry: "Return";
   
   show-icons: true;
 }
@@ -12,16 +16,11 @@ configuration {
 @theme "/dev/null"
 
 * {
-  //bg: #0d1f00;
-  //bg-alt: #0d1f00;
   bg: #0F1409;
   bg-alt: #0F1409;
-  //bg-selected: #527653;
   bg-selected: #282828;
-  //fg: #66B032;
   fg: #A4BE82;
   fg-alt: #000000;
-  //high: #1fd621;
   high: #60663d;
   background-color: @bg;
 }
