@@ -17,7 +17,7 @@ end)
 
 require('mason').setup({})
 require('mason-lspconfig').setup({
-  ensure_installed = {'rust_analyzer', 'clangd', 'pylsp', 'texlab', 'jdtls'},
+  ensure_installed = {'clangd', 'pylsp', 'jdtls'},
   handlers = {
     lsp_zero.default_setup,
     lua_ls = function()
@@ -47,14 +47,12 @@ vim.diagnostic.config {
   },
 }
 
-require('luasnip.loaders.from_vscode').lazy_load()
-
 cmp.setup({
   sources = {
     {name = 'path'},
     {name = 'nvim_lsp'},
     {name = 'nvim_lua'},
-    {name = 'luasnip', keyword_length = 2},
+    --{name = 'luasnip', keyword_length = 2},
     {name = 'buffer', keyword_length = 3},
   },
   formatting = lsp_zero.cmp_format({details = false}),

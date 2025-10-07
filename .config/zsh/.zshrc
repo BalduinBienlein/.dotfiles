@@ -86,6 +86,9 @@ alias tmux_sessions='t $(zoxide query -l | fzf)'
 # t-script for tmux sessions
 export PATH=$HOME/.config/tmux/plugins/t-smart-tmux-session-manager/bin:$PATH
 
+# Path for typst
+export TYPST_ROOT="$HOME/Documents/notes/"
+
 # fzf colors
 export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
   --color=fg:#434d44,fg+:#5b7d5b,bg:#0F1409,bg+:#262626
