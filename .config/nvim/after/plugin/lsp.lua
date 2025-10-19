@@ -27,6 +27,15 @@ require('mason-lspconfig').setup({
   }
 })
 
+vim.lsp.config.tinymist = {
+  cmd = { "tinymist" },
+  filetypes = { "typst" },
+  root_dir = function(fname)
+    return vim.fn.expand("~/Documents/notes")
+  end,
+  single_file_support = true,
+}
+
 local cmp = require('cmp')
 local cmp_select = {behavior = cmp.SelectBehavior.Select}
 

@@ -10,6 +10,7 @@
 .config/QtProject.conf
 .config/kdeglobals
 .config/kdenlive-layoutsrc
+.config/inkscape
 .config/kdenliverc
 .local/bin/debugpy
 .local/bin/debugpy-adapter

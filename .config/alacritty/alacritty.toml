@@ -12,13 +12,8 @@ white = "#a1b297"
 yellow = "#d6c557"
 
 [colors.primary]
-# oldbackground = "#0d1f00"
-# background = "#090F13"
 background = "#0F1409"
-# background = "#282828"
-#foreground = "#66B032"
-foreground = "#A4BE82"
-#foreground = "#af7200"
+foreground = "#434d44"
 
 [font]
 size = 10

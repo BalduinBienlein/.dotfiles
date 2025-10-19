@@ -33,7 +33,7 @@
     origin = top-right
 
     # Offset from the origin
-    offset = (20, 30)
+    offset = (30, 35)
 
     # Scale factor. It is auto-detected if value is 0.
     scale = 0
@@ -95,7 +95,7 @@
     frame_width = 2
 
     # Defines color of the frame around the notification window.
-    frame_color = "#60663d"
+    frame_color = "#1a1a1a"
 
     # Size of gap to display between notifications - requires a compositor.
     # If value is greater than 0, separator_height will be ignored and a border
@@ -123,7 +123,7 @@
 
     ### Text ###
 
-    font = JetBrainsMono Nerd Font Medium 10
+    font = JetBrainsMono Nerd Font Medium 12
 
     # The spacing between lines.  If the height is smaller than the
     # font height, it will get raised to the font height.
@@ -217,7 +217,7 @@
     max_icon_size = 32
 
     # Paths to default icons (only neccesary when not using recursive icon lookup)
-    icon_path = /usr/share/icons/gnome/16x16/status/:/usr/share/icons/gnome/16x16/devices/
+    icon_path = /usr434d44/icons/gnome/16x16/status/:/usr/share/icons/gnome/16x16/devices/
 
     ### History ###
 
@@ -282,20 +282,20 @@
 
 [urgency_low]
     background = "#0F1409"
-    foreground = "#A4BE82"
+    foreground = "#434d44"
     timeout = 5
     #default_icon = /path/to/icon
 
 [urgency_normal]
     background = "#0F1409"
-    foreground = "#A4BE82"
+    foreground = "#434d33"
     timeout = 5
     #default_icon = /path/to/icon
 
 [urgency_critical]
-    background = "#900000"
-    foreground = "#0F1409"
-    frame_color = "#ff0000"
+    background = "#0F1409"
+    foreground = "#FF5C00"
+    frame_color = "#FF5C00"
     timeout = 5
     #default_icon = /path/to/icon
 

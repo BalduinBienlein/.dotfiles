@@ -19,7 +19,7 @@ export HISTFILE="$HOME/.config/zsh/zsh_history"
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://gith ub.com/ohmyzsh/ohmyzsh/wiki/Themes
 #ZSH_THEME="gallois"
-echo -ne "\e]12;#515942\a"
+echo -ne "\e]12;#FF5C00\a"
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
 
@@ -87,7 +87,7 @@ alias tmux_sessions='t $(zoxide query -l | fzf)'
 export PATH=$HOME/.config/tmux/plugins/t-smart-tmux-session-manager/bin:$PATH
 
 # Path for typst
-export TYPST_ROOT="$HOME/Documents/notes/"
+export TYPST_ROOT="$HOME/Documents/notes"
 
 # fzf colors
 export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'

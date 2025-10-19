@@ -36,6 +36,17 @@ return {
     ]], { i(1), i(2) })
     ),
 
+    s({ trig = "counter" },
+    fmta([[
+    #let words = "<>"
+
+    <>
+
+    #let count = words.matches(regex("[\p{Han}]|\b[[\w--\p{Han}]'’.,\-]+\b")).len()
+    Word count #count
+    ]], { i(1), i(2) })
+    ),
+
     s({ trig = "cent" },
     fmta("#align(center)[<>]", { i(1) })
     ),

@@ -19,14 +19,14 @@ configuration {
   bg: #0F1409;
   bg-alt: #0F1409;
   bg-selected: #282828;
-  fg: #A4BE82;
+  fg: #434D44;
   fg-alt: #000000;
-  high: #60663d;
+  high: #1a1a1a;
   background-color: @bg;
 }
 
 window {
-  border: 2px;
+  border: 3px;
   border-color: @high;
   border-radius: 7px;
   width: 50%;
@@ -38,6 +38,11 @@ element {
   text-color: @fg;
 }
 
+entry {
+  cursor-color: #FF5C00;
+  cursor-width: 8px;
+}
+
 element selected {
   text-color: @fg-alt;
   background-color: @bg-selected;
@@ -47,6 +52,7 @@ element-text {
   background-color: transparent;
   text-color: inherit;
   vertical-align: 0.5;
+  size: 60px;
 }
 
 element-icon {
