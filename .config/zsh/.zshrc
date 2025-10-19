@@ -68,7 +68,8 @@ source $ZSH/oh-my-zsh.sh
 
 
 # Alias
-alias ls='lsd'
+alias ls='ls --indicator-style=slash --color=auto'
+alias la='ls -la --indicator-style=slash --color=auto'
 
 # Update mirrorlist
 alias update_mirrorlist='sudo reflector --country Germany --latest 5 --p http --p https --sort rate --save /etc/pacman.d/mirrorlist && notify-send "Update mirror list" ""'
