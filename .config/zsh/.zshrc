@@ -52,6 +52,9 @@ plugins=(git archlinux zsh-syntax-highlighting zsh-autosuggestions)
 export ZSH_COMPDUMP="$ZSH/cache/.zcompdump"
 source $ZSH/oh-my-zsh.sh
 
+# change auto suggestion keybind
+bindkey '^F' autosuggest-accept
+
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -69,7 +72,8 @@ source $ZSH/oh-my-zsh.sh
 
 # Alias
 alias ls='ls --indicator-style=slash --color=auto'
-alias la='ls -la --indicator-style=slash --color=auto'
+alias la='ls -lA --indicator-style=slash --color=auto'
+alias vim='nvim'
 
 # Update mirrorlist
 alias update_mirrorlist='sudo reflector --country Germany --latest 5 --p http --p https --sort rate --save /etc/pacman.d/mirrorlist && notify-send "Update mirror list" ""'

@@ -4,9 +4,11 @@ vim.cmd("colorscheme darkearth")
 --     pattern = "text",
 --     callback = function()
 --         -- change the foreground (fg) and background (bg) for Normal
---         vim.api.nvim_set_hl(0, "Normal", { fg = "#535634", bg = "NONE" })
+--         vim.api.nvim_set_hl(0, "Normal", { fg = "#434D44", bg = "NONE" })
 --     end,
 -- })
+
+vim.api.nvim_set_hl(0, "Normal", { fg = "#434D44", bg = "NONE" })
 
 local function make_transparent(group)
   local ok, hl = pcall(function()

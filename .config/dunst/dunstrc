@@ -288,7 +288,7 @@
 
 [urgency_normal]
     background = "#0F1409"
-    foreground = "#434d33"
+    foreground = "#434d44"
     timeout = 5
     #default_icon = /path/to/icon
 
