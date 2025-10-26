@@ -51,6 +51,33 @@ return {
     fmta("#align(center)[<>]", { i(1) })
     ),
 
+
+    s({ trig = "lc", snippetType = "autosnippet" },
+    fmta([[
+    #import "/templates/lecture.typ": *
+    #let title = "<>"
+    #let author = "<>"
+    #let professor = "<>"
+    #let creater = "<>"
+    #let time = "<>"
+    #let abstract = "<>" 
+
+    #show: note_page.with(title, author, professor, creater, time, abstract)
+    ]], { i(1), i(2), i(3), i(4), i(5), i(6)})
+    ),
+
+    s({ trig = "tm", snippetType = "autosnippet" },
+    fmta([[
+    #import "/templates/main.typ": *
+
+    #show: doc =>> template(
+        [<>],
+        <>,
+        doc,
+    )
+    ]], { i(1), i(2) })
+    ),
+
     s({ trig = "mla" },
 	fmta([[
     #set page(header: context align(right)[Karuth #counter(page).get().first()])

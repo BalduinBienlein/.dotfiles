@@ -15,3 +15,14 @@ vim.api.nvim_create_autocmd("FileType", {
         vim.opt_local.expandtab = true
     end,
 })
+
+require('typst-preview').setup({
+    get_root = function(path)
+        local env = os.getenv("TYPST_ROOT")
+        if env and env ~= "" then
+            return vim.fn.expand(env)
+        end
+        return vim.fn.fnamemodify(path, ':p:h')
+    end,
+})
+

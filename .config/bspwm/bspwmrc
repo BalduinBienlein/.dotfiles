@@ -7,7 +7,7 @@ bspc monitor eDP-1 -d 1 2 3 4 5
 bspc monitor DP-2 -d 1 2 3 4 5
 bspc monitor HDMI-1 -d 1 2 3 4 5
 
-bspc config border_width          2 
+bspc config border_width          2
 bspc config window_gap            10 
 
 bspc config split_ratio           0.5
@@ -28,14 +28,14 @@ picom -b
 
 xsetroot -cursor_name left_ptr
 
-# CapsLock → Ctrl (hold) / Esc (tap)
+# CapsLock -> Ctrl (hold) / Esc (tap)
 xmodmap -e 'remove Lock = Caps_Lock' \
         -e 'keysym Caps_Lock = Control_L' \
         -e 'add Control = Control_L'
 
 xcape -e 'Control_L=Escape'
 
-# PrintScreen → Super
+# PrintScreen -> Super
 xmodmap -e 'keysym Print = Super_L'
 xmodmap -e 'add Mod4 = Super_L'
 
