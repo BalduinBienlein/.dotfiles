@@ -12,5 +12,6 @@
 .config/kdenlive-layoutsrc
 .config/inkscape
 .config/kdenliverc
+.config/spotify
 .local/bin/debugpy
 .local/bin/debugpy-adapter

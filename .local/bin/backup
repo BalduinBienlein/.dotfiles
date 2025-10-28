@@ -1,0 +1,51 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+if [[ -n "${SUDO_USER-}" && "$SUDO_USER" != "root" ]]; then
+    USER_HOME=$(eval echo "~$SUDO_USER")
+else
+    USER_HOME="$HOME"
+fi
+
+SOURCE_DIRS=(
+    "$USER_HOME/Documents"
+    "$USER_HOME/Pictures"
+    "$USER_HOME/Videos"
+)
+
+MOUNT_POINT=$(find "/run/media/saunter" -maxdepth 1 -type d -name "backups" | head -n1)
+if [[ -z "$MOUNT_POINT" ]]; then
+    echo "Backup drive not mounted! Is udiskie running?"
+    exit 1
+fi
+
+DEST_DIR="$MOUNT_POINT/file-backup"
+mkdir -p "$DEST_DIR"
+
+for SRC in "${SOURCE_DIRS[@]}"; do
+    EXCLUDES=()
+
+    if [[ "$SRC" == "$USER_HOME/Documents" ]]; then
+        EXCLUDES=( "projects/" "notes/templates/" )
+    elif [[ "$SRC" == "$USER_HOME/Videos" ]]; then
+        EXCLUDES=( "watch/" "movies/" )
+    fi
+
+    if [[ -d "$SRC" ]]; then
+        EXCLUDE_ARGS=()
+        for e in "${EXCLUDES[@]}"; do
+            EXCLUDE_ARGS+=( "--exclude=$e" )
+        done
+
+        SUBDIR_NAME=$(basename "$SRC")
+        echo "Backing up $SRC -> $DEST_DIR/$SUBDIR_NAME"
+        rsync -aHAX --partial --progress --human-readable --info=progress2 \
+            --compress --delete "${EXCLUDE_ARGS[@]}" \
+            "$SRC/" "$DEST_DIR/$SUBDIR_NAME/" 2>&1
+    else
+        echo "Skipping $SRC (not found)"
+    fi
+done
+
+sync
+echo "$(date -Iseconds) - Backup completed successfully"

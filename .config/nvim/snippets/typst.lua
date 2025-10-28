@@ -51,6 +51,13 @@ return {
     fmta("#align(center)[<>]", { i(1) })
     ),
 
+    s({ trig = "lead" },
+    fmta("#set par(leading: 1.2em)", {})
+    ),
+
+    s({ trig = "line" },
+    fmta("#line(length: 50%)", {})
+    ),
 
     s({ trig = "lc", snippetType = "autosnippet" },
     fmta([[
