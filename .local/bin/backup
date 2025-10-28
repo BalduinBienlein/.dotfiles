@@ -1,9 +1,13 @@
-#!/usr/bin/env bash
+#!/usr/bin/bash
+# Obiously tailored to my backup and note structure and that I use udiske for auto mounting
+
 set -euo pipefail
 
 if [[ -n "${SUDO_USER-}" && "$SUDO_USER" != "root" ]]; then
+    REAL_USER="$SUDO_USER"
     USER_HOME=$(eval echo "~$SUDO_USER")
 else
+    REAL_USER="$USER"
     USER_HOME="$HOME"
 fi
 
@@ -13,7 +17,7 @@ SOURCE_DIRS=(
     "$USER_HOME/Videos"
 )
 
-MOUNT_POINT=$(find "/run/media/saunter" -maxdepth 1 -type d -name "backups" | head -n1)
+MOUNT_POINT=$(find "/run/media/$REAL_USER" -maxdepth 1 -type d -name "backups" | head -n1)
 if [[ -z "$MOUNT_POINT" ]]; then
     echo "Backup drive not mounted! Is udiskie running?"
     exit 1
