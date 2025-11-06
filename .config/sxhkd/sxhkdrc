@@ -8,7 +8,7 @@ super + t
 super + space
 	rofi -show drun
 
-ctrl + b
+super + b
     xdotool type $(rg -v '^#' $HOME/.local/share/snippets | rofi -dmenu -i | cut -d' ' -f1)
 
 super + p
@@ -32,8 +32,17 @@ super + r
 super + s
     flameshot gui
 
-super + b
+super + v
+    alacritty -e zsh -ic \
+    'tmp=$(mktemp); echo "$FILE" > "$tmp"; nvim "$tmp"; FILE=$(cat "$tmp"); rm "$tmp"; \
+    ffmpeg -f x11grab -video_size 1920x1080 -framerate 25 -i $DISPLAY \
+    -f pulse -i default -c:v libx264 -preset ultrafast -c:a aac $HOME/Videos/yts/$FILE'
+
+ctrl + b
 	firefox
+
+super + d
+    notify-send "$(date)"
 
 {F10,F11}
     connect_headphones

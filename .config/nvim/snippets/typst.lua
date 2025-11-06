@@ -75,53 +75,39 @@ return {
 
     s({ trig = "tm", snippetType = "autosnippet" },
     fmta([[
-    #import "/templates/main.typ": *
+    #import "/templates/normal.typ": *
 
     #show: doc =>> template(
         [<>],
-        <>,
+        true,
         doc,
     )
-    ]], { i(1), i(2) })
+    ]], { i(1) })
     ),
 
-    s({ trig = "mla" },
+    s({ trig = "mla", snippetType = "autosnippet" },
 	fmta([[
-    #set page(header: context align(right)[Karuth #counter(page).get().first()])
+    #import "/templates/mla.typ": *
 
-    Tobias Karuth
-
-    #datetime.today().display("[day] [month repr:long] [year]")
-
-    <>
-
-    <>
-	]], { i(1), i(2) })
+    #show: doc =>> template(
+        [<>],
+        doc,
+    )
+	]], { i(1) })
 	),
 
-    s({ trig = "head" },
+    s({ trig = "pst", snippetType = "autosnippet" },
     fmta([[
-    #set page(
-        header: context {
-            if counter(page).get().first() == 1 [
-                Tobias Karuth
-                #h(1fr)
-                <>
-                #h(1fr)
-                #datetime.today().display("[day] [month repr:long] [year]")
-                ]
-            else [
-                Tobias Karuth
-                #h(1fr)
-                #datetime.today().display("[day] [month repr:long] [year]")
-                ]
-            },
-        footer: context [
-            #align(right)[#counter(page).get().first() of
-            #counter(page).final().at(0)]
-        ]
+    #import "/templates/problems.typ": *
+
+    #show: doc =>> template(
+        [<>],
+        true,
+        [<>],
+        [<>],
+        doc,
     )
-    <>
-    ]], { i(1), i(2) })
+
+    ]], { i(1), i(2), i(3) })
     ),
 }
