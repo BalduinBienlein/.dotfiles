@@ -45,10 +45,10 @@ super + d
     notify-send "$(date)"
 
 {F10,F11}
-    connect_headphones
+    connect-bluetooth
 
 F8
-    connect_wifi
+    connect-wifi
 
 # bspwm hotkeys
 super + q

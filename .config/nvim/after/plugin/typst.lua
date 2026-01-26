@@ -26,3 +26,9 @@ require('typst-preview').setup({
     end,
 })
 
+vim.api.nvim_create_user_command('EditFig', function()
+  local figure_fname = vim.fn.expand('<cfile>')
+  vim.fn.jobstart({ 'typst-figure', figure_fname }, { detach = true })
+end, {})
+
+vim.keymap.set('n', '<leader>td', ':EditFig<CR>', { noremap = true, silent = true })

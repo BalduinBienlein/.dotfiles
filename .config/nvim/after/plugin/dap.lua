@@ -7,7 +7,7 @@ local dap_virtual_text = require("nvim-dap-virtual-text")
 dap_virtual_text.setup()
 
 mason_dap.setup({
-    ensure_installed = { "debugpy", "cpptools" },
+    ensure_installed = { "debugpy", "cpptools", "bash-debug-adapter", },
     automatic_installation = true,
     handlers = {
         function(config)
@@ -15,6 +15,12 @@ mason_dap.setup({
         end,
     },
 })
+
+dap.adapters.bashdb = {
+  type = 'executable';
+  command = vim.fn.stdpath("data") .. '/mason/packages/bash-debug-adapter/bash-debug-adapter';
+  name = 'bashdb';
+}
 
 -- Configurations
 dap.configurations = {
@@ -64,6 +70,28 @@ dap.configurations = {
             MIMode = "lldb",
         },
     },
+    sh = {
+        {
+            type = 'bashdb',
+            request = 'launch',
+            name = "Launch file",
+            showDebugOutput = true,
+            pathBashdb = vim.fn.stdpath("data") .. '/mason/packages/bash-debug-adapter/extension/bashdb_dir/bashdb',
+            pathBashdbLib = vim.fn.stdpath("data") .. '/mason/packages/bash-debug-adapter/extension/bashdb_dir',
+            trace = true,
+            file = "${file}",
+            program = "${file}",
+            cwd = '${workspaceFolder}',
+            pathCat = "cat",
+            pathBash = "/bin/bash",
+            pathMkfifo = "mkfifo",
+            pathPkill = "pkill",
+            args = {},
+            argsString = '',
+            env = {},
+            terminalKind = "integrated",
+        },
+    }
 }
 
 -- Dap UI

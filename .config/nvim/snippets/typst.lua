@@ -28,13 +28,58 @@ return {
     s({ trig = "fg", snippetType = "autosnippet" },
     fmta([[
     #figure(
-        image("<>"),
+        image("figs/%/<>.svg"),
         caption: [
         <>
         ],
     )
     ]], { i(1), i(2) })
     ),
+
+    s({ trig = "fig(%a?)", regTrig = true, desc = "create a figure" }, fmt([[
+	#figure(
+	  {content}
+	  caption: [{caption}],
+	) <{label}>
+	]], {
+		caption = i(2, ""),
+		label = i(1, ""),
+		content = d(3, function(args, snip)
+			if not snip.captures[1] or snip.captures[1] == "" then
+				-- regular figure
+				return sn(nil,
+					fmt([[
+					image("{path}.{ext}"),
+					]], {
+						path = f(function()
+							return "fig/" .. vim.fn.expand("%:r") .. "/" .. (args[1][1] or nil)
+						end),
+						ext = c(1, { t("svg"), t("jpg"), t("png") })
+					})
+				)
+			elseif snip.captures[1] == "t" then
+				return sn(nil,
+					fmt([[
+					table(
+					    columns: {cols},
+					    table.header{head},
+					    {content}
+					  ),
+					]], {
+						head = i(1, "[Header][Header]"),
+						content = i(2, "[Content], [Content],"),
+						cols = f(function(largs)
+							-- the number of columns is the number of left brackets [ in the header
+							local _, cnt = string.gsub(largs[1][1], "%[", "")
+							-- the error for not converting to string was cryptic
+							-- wasted 10 minutes on this :(
+							return tostring(cnt)
+						end, { 1 })
+					})
+				)
+			end
+		end, { 1 }),
+	})),
 
     s({ trig = "counter" },
     fmta([[

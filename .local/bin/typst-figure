@@ -1,0 +1,34 @@
+#!/bin/sh
+# if there is no figs dir in $pwd make one
+# if there is no dir with % in figs prompt wich one to use
+#   if no prompt dir mkdir
+# go in to proj dir in figs dir
+# if no $1 exist touch
+# OPEN(figs/proj/$1.svg)
+# void open($1)(
+#   enable inkscape shortcut manager
+#   open inkscape with $1
+# )
+
+# DIR="figs"
+# COND=$(find figs)
+# case "$DIR" in
+#     *"$COND"*) echo "figs" ;;
+#     *) mkdir figs ;;
+# esac
+PROJ="LinAlg"
+SHORT="$HOME/Documents/projects/inkscape-shortcut-manager"
+
+if [ "$(find figs)" != "figs" ]; then
+    mkdir figs
+fi
+
+if [ "$(find "$PWD"/figs/$PROJ)" != "$PROJ" ]; then
+    "$(mkdir "$PWD"/figs/$PROJ)"
+fi
+
+. "$HOME/Documents/projects/inkscape-shortcut-manager/venv/bin/"
+
+
+# typst-shortcut manager
+# open figs/PROJ/$1 in inkscape

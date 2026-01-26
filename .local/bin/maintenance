@@ -7,7 +7,7 @@ echo "ArchLinux-Maintenance Script"
 systemctl --failed
 journalctl -p 3 -b
 sudo pacman -Syyu
-update_mirrorlist # is aliased to reflector
+update-mirrorlist # is aliased to reflector
 
 echo -e "\n"
 echo "Orphaned packages :"

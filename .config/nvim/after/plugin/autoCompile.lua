@@ -19,7 +19,7 @@ vim.keymap.set("n", "<leader>r", function()
         cmd = string.format("g++ %s -o %s && ./%s", file_name, name_no_ext, name_no_ext)
     elseif ext == "py" then
         cmd = string.format("python %s", file_name)
-    elseif ext == "sh" then
+    elseif ext == "" then
         cmd = string.format("bash %s", file_name)
     else
         vim.notify("Unsupported filetype: " .. ext, vim.log.levels.WARN)
